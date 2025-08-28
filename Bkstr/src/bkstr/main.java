@@ -3,7 +3,8 @@ package bkstr;
 public class main {
 
 	public static void main(String[] args) {
-		System.out.println("Henlo");
+		login log = new login();
+		log.setVisible(true);
 	}
 
 }
