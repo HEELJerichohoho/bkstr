@@ -151,20 +151,15 @@ public class login extends JFrame {
 		chckbxsp.addActionListener(e -> {
 		    if (!String.valueOf(txtpass.getPassword()).equals(passplaceholder)) {
 		        if (chckbxsp.isSelected()) {
-		        	txtpass.setEchoChar((char)0); // show actual characters
+		        	txtpass.setEchoChar((char)0); 
 		        } else {
-		        	txtpass.setEchoChar('•'); // hide as bullets
+		        	txtpass.setEchoChar('•');
 		        }
 		    }
 		});
 		
 		logpanel.add(chckbxsp);
 		
-		
-		
-		
-		
-
 		setSize(739, 389);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
