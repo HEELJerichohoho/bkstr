@@ -1,5 +1,9 @@
 package bkstr;
 
 public class main {
-System.out.println("tite");
+
+	public static void main(String[] args) {
+		System.out.println("Henlo");
+	}
+
 }
