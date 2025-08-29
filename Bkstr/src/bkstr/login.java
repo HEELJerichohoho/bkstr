@@ -6,15 +6,21 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class login extends JFrame {
 	private JTextField txtuser;
 	private JPasswordField txtpass;
 	String placeholder = "Enter Your Username";
 	String passplaceholder = "Enter Your Password";
+	
 
 	public login() {
 		setTitle("Welcome to the Bookstore!");
+		setResizable(false);
+
+		
 		getContentPane().setLayout(null);
 
 		UIManager.put("ToolTip.background", new Color(139, 69, 19));
@@ -163,6 +169,15 @@ public class login extends JFrame {
 		logpanel.add(btnlogin);
 
 		JLabel lblsignup = new JLabel("Sign Up");
+		lblsignup.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				new regis().setVisible(true);
+				dispose();
+			}
+		});
+		
 		lblsignup.setToolTipText("Click here to sign up");
 		lblsignup.setForeground(Color.WHITE);
 		lblsignup.setFont(new Font("Tahoma", Font.PLAIN, 12));

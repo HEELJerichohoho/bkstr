@@ -4,9 +4,8 @@ public class main {
 
 	public static void main(String[] args) {
 		
-		splash spl = new splash(3000);
-		spl.showsplash(3000);
-		
+		 splash sp = new splash();
+	        sp.showsplash();
 		login log = new login();
 		log.setVisible(true);
 	}
