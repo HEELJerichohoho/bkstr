@@ -125,18 +125,29 @@ public class login extends JFrame {
 				if((username.equals(placeholder) || username.isEmpty()) && (password.equals(passplaceholder) || password.isEmpty()))
 						{
 					JOptionPane.showMessageDialog(null, "Please enter username and password");
+					return;
 				}else if(username.equals(placeholder) || username.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Please enter username");
+					return;
 				}else if(password.equals(passplaceholder) || password.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Please enter password");
+					return;
 				}else if(dbcon.validatelogin(username, password)) {
+					
 					
 					JOptionPane.showMessageDialog(null, "Login Successfully");
 					new dash().setVisible(true);
 					dispose();
 					
 				} else {
-					JOptionPane.showMessageDialog(null, "Invalid username or password.");
+					
+					if(!dbcon.userexist(username)) {
+						JOptionPane.showMessageDialog(null, "Username does not exist");
+					}else {
+						JOptionPane.showMessageDialog(null, "Incorrect password");
+					}
+					
+					
 					
 				}
 				
