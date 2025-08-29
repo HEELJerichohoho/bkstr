@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class login extends JFrame {
 	private JTextField txtuser;
@@ -114,6 +116,33 @@ public class login extends JFrame {
 		logpanel.add(lblforgotpass);
 
 		JButton btnlogin = new JButton("Login");
+		btnlogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String username = txtuser.getText();
+				String password = String.valueOf(txtpass.getPassword());
+				
+				
+				if((username.equals(placeholder) || username.isEmpty()) && (password.equals(passplaceholder) || password.isEmpty()))
+						{
+					JOptionPane.showMessageDialog(null, "Please enter username and password");
+				}else if(username.equals(placeholder) || username.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Please enter username");
+				}else if(password.equals(passplaceholder) || password.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Please enter password");
+				}else if(dbcon.validatelogin(username, password)) {
+					
+					JOptionPane.showMessageDialog(null, "Login Successfully");
+					new dash().setVisible(true);
+					dispose();
+					
+				} else {
+					JOptionPane.showMessageDialog(null, "Invalid username or password.");
+					
+				}
+				
+			
+			}
+		});
 		btnlogin.setToolTipText("Log in your account");
 		btnlogin.setForeground(new Color(139, 69, 19));
 		btnlogin.setBackground(Color.WHITE);
