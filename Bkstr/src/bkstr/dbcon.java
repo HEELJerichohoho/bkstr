@@ -49,6 +49,22 @@ public static boolean validatelogin(String username, String password) {
 	
 }
 
+public static boolean userexist(String username) {
+	String sql2 = "SELECT 1 FROM acc WHERE Acc_User = ?";
+	
+	try (Connection conn = getConnection();
+		PreparedStatement pst2 = conn.prepareStatement(sql2)){
+		pst2.setString(1, username);
+		try(ResultSet rs = pst2.executeQuery()) {
+			return rs.next();
+		}
+	}catch (SQLException e) {
+		e.printStackTrace();
+		return(false);
+	}
+	
+}
+
 
 }
 
