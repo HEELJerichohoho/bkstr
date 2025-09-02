@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.Arrays;
 
 public class regis extends JFrame {
 	private JTextField txtuserreg;
@@ -114,6 +117,22 @@ public class regis extends JFrame {
 			
 		});
 		
+		
+		txtpassregis.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				String vpass = new String(txtpassregis.getPassword());
+				if(!validpass(vpass)) {
+					txtpassregis.setToolTipText("Password must be 8+ chars, include letters, numbers, and special chars");
+		            txtpassregis.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+				}else {
+		            txtpassregis.setToolTipText(null);
+		            txtpassregis.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
+		        }
+				
+			}
+		});
+		
 		regpanel.add(txtpassregis);
 		
 		txtpassregiscon = new JPasswordField();
@@ -145,6 +164,26 @@ public class regis extends JFrame {
 				
 			}
 		});
+		
+		txtpassregiscon.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+			    char[] pass = txtpassregis.getPassword();
+			    char[] confirm = txtpassregiscon.getPassword();
+
+			    if (!Arrays.equals(pass, confirm)) {
+			        txtpassregiscon.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+			        txtpassregiscon.setToolTipText("Passwords do not match");
+			    } else {
+			        txtpassregiscon.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
+			        txtpassregiscon.setToolTipText(null);
+			    }
+			}
+
+		});
+		
+		
+		
 		regpanel.add(txtpassregiscon);
 		
 		txtnum = new JTextField();
@@ -210,12 +249,14 @@ public class regis extends JFrame {
 		regpanel.add(lblrnum);
 		
 		JButton btnNewButton = new JButton("Cancel");
+		btnNewButton.setToolTipText("Click to cancel your registration");
 		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnNewButton.setForeground(new Color(139, 69, 19));
 		btnNewButton.setBounds(137, 260, 89, 23);
 		regpanel.add(btnNewButton);
 		
 		JButton btnCancel = new JButton("Confirm");
+		btnCancel.setToolTipText("Click if you are finished entering valid information");
 		btnCancel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnCancel.setForeground(new Color(139, 69, 19));
 		btnCancel.setBounds(252, 260, 89, 23);
@@ -226,4 +267,11 @@ public class regis extends JFrame {
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}
+	
+	private boolean validpass(String pass){
+		String regex = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*?&._-])[A-Za-z\\d@$!%*?&._-]{8,}$";
+		return pass.matches(regex);
+	}
+	
+	
 }
